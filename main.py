@@ -7,7 +7,7 @@ from sklearn.preprocessing import StandardScaler
 
 ### 데이터 불러오기 및 전처리 ###
 def load_and_preprocess_data():
-    df = pd.read_csv(r"C:\Users\gon\Desktop\GPT\credit\csvdata (3).csv")
+    df = pd.read_csv("csvdata (3).csv")
     df = df.drop(["first_funding_at", "last_funding_at"], axis=1)
     df = df.drop(columns=df.columns[0])
 
@@ -48,7 +48,7 @@ def load_model(X_df, y_df):
     X_train_df, X_val_df, y_train_df, y_val_df = train_test_split(X_temp_df, y_temp_df, test_size=0.25, random_state=40, stratify=y_temp_df)
     X_train_scaled_df = pd.DataFrame(scaler.fit_transform(X_train_df.values), columns=X_df.columns)
 
-    model_path = r"C:\Users\gon\Desktop\GPT\credit\mlp_model.pth"
+    model_path = "mlp_model.pth"
     loaded_model = MLP(input_size=X_train_scaled_df.shape[1])
     loaded_model.load_state_dict(torch.load(model_path))
     loaded_model.eval()
